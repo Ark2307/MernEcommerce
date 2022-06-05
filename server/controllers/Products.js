@@ -21,6 +21,26 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
+// get a single product details
+exports.getProduct = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(500).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    res.status(201).json({
+      success: true,
+      product,
+    });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 // update product -- (only admin)
 exports.updateProduct = async (req, res) => {
   try {
@@ -42,7 +62,7 @@ exports.updateProduct = async (req, res) => {
       product,
     });
   } catch (error) {
-    res.json(400).json(error);
+    res.status(400).json(error);
   }
 };
 
