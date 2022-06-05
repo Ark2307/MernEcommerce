@@ -1,5 +1,5 @@
-const { findById, findByIdAndDelete } = require("../models/productSchema");
 const Product = require("../models/productSchema");
+const ErrorHandler = require("../utils/errorHandling");
 
 // created product here -- (only admin)
 exports.createProduct = async (req, res, next) => {
@@ -26,10 +26,7 @@ exports.getProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
     if (!product) {
-      return res.status(500).json({
-        success: false,
-        message: "Product not found",
-      });
+      return next(new ErrorHandler("Product Not Found", 404));
     }
 
     res.status(201).json({
@@ -42,14 +39,11 @@ exports.getProduct = async (req, res, next) => {
 };
 
 // update product -- (only admin)
-exports.updateProduct = async (req, res) => {
+exports.updateProduct = async (req, res, next) => {
   try {
     let product = await Product.findById(req.params.id);
     if (!product) {
-      return res.status(500).json({
-        success: false,
-        message: "Product not found",
-      });
+      return next(new ErrorHandler("Product Not Found", 404));
     }
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
@@ -67,14 +61,11 @@ exports.updateProduct = async (req, res) => {
 };
 
 // delete product --(only admin)
-exports.deleteProduct = async (req, res) => {
+exports.deleteProduct = async (req, res, next) => {
   try {
     let product = await Product.findById(req.params.id);
     if (!product) {
-      return res.status(500).json({
-        success: false,
-        message: "Product not found",
-      });
+      return next(new ErrorHandler("Product Not Found", 404));
     }
 
     await product.remove();
