@@ -5,6 +5,14 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.message = err.message || "Internal Server error!";
 
+  // handling cast errors from mongoDB(eg -> length of id is long but you
+  // type only 2-3 letters)
+
+  if (err.name === "CastError") {
+    const message = `Invalid resource : ${err.path}`;
+    err = new ErrorHandler(message, 400);
+  }
+
   res.status(err.statusCode).json({
     success: false,
     error: err.stack,

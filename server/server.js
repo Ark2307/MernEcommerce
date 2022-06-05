@@ -3,6 +3,14 @@ const dotenv = require("dotenv");
 
 const connectDB = require("./config/database");
 
+// uncaught Errors handled here{eg : clg(youtube)}
+process.on("uncaughtException", (err) => {
+  console.log(`Error: ${err.message}`);
+  console.log(`Shutting down server due to unhandled exception`);
+
+  process.exit(1);
+});
+
 // config
 dotenv.config({ path: "server/config/config.env" });
 
