@@ -1,5 +1,8 @@
 const Product = require("../models/productSchema");
+const ApiFeatures = require("../utils/apiFeatures");
 const ErrorHandler = require("../utils/errorHandling");
+
+const catchAsync = require("../middlewares/tryCatchError");
 
 // created product here -- (only admin)
 exports.createProduct = async (req, res, next) => {
@@ -12,14 +15,25 @@ exports.createProduct = async (req, res, next) => {
 };
 
 // get all products
-exports.getAllProducts = async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.status(201).json({ success: true, products });
-  } catch (error) {
-    res.status(400).json(error);
-  }
-};
+exports.getAllProducts = catchAsync(async (req, res) => {
+  const resultPerPage = 7;
+  const productCount = await Product.countDocuments();
+
+  const apiFeature = new ApiFeatures(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resultPerPage);
+
+  // now as search function has returned the class with keyword
+  // we can use all of its methods
+
+  const products = await apiFeature.query;
+  res.status(201).json({
+    success: true,
+    products,
+    productCount,
+  });
+});
 
 // get a single product details
 exports.getProduct = async (req, res, next) => {

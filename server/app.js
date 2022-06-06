@@ -1,5 +1,4 @@
 const express = require("express");
-const { append } = require("express/lib/response");
 const APP = express();
 
 const errorMiddleware = require("./middlewares/error");

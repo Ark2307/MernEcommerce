@@ -10,6 +10,7 @@ module.exports = (err, req, res, next) => {
 
   if (err.name === "CastError") {
     const message = `Invalid resource : ${err.path}`;
+    //console.log(err);
     err = new ErrorHandler(message, 400);
   }
 

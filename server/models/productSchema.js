@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: [true, "Please enter the price of the product"],
-    maxLength: [7, "Value cannot exceed 7 characters"],
+    maxLength: [8, "Value cannot exceed 7 characters"],
   },
   category: {
     type: String,
