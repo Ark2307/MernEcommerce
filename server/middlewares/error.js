@@ -4,6 +4,7 @@ const ErrorHandler = require("../utils/errorHandling");
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.message = err.message || "Internal Server error!";
+  // console.log(err);
 
   // handling cast errors from mongoDB(eg -> length of id is long but you
   // type only 2-3 letters)
