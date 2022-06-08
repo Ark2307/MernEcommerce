@@ -1,11 +1,6 @@
 const express = require("express");
-const {
-  registerUser,
-  loginUser,
-  logoutUser,
-  forgotPassword,
-  resetPassword,
-} = require("../controllers/Users");
+const { forgotPassword, resetPassword } = require("../controllers/Passwords");
+const { registerUser, loginUser, logoutUser } = require("../controllers/Users");
 const ROUTER = express.Router();
 
 ROUTER.route("/register").post(registerUser);
