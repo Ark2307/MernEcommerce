@@ -7,6 +7,8 @@ const catchAsync = require("../middlewares/tryCatchError");
 // created product here -- (only admin)
 exports.createProduct = async (req, res, next) => {
   try {
+    req.body.user = req.user.id;
+
     const product = await Product.create(req.body);
     res.status(201).json({ success: true, product });
   } catch (err) {
