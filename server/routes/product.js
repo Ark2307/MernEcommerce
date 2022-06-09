@@ -1,12 +1,11 @@
 const express = require("express");
-
 const {
-  getAllProducts,
   createProduct,
   updateProduct,
   deleteProduct,
-  getProduct,
-} = require("../controllers/Products");
+} = require("../controllers/AdminTasks");
+
+const { getAllProducts, getProduct } = require("../controllers/Products");
 const {
   isAuthenticated,
   authorizedRole,
@@ -15,21 +14,22 @@ const {
 const ROUTER = express.Router();
 
 ROUTER.route("/products").get(getAllProducts);
-ROUTER.route("/product/create").post(
+ROUTER.route("/product/:id").get(getProduct);
+
+ROUTER.route("/admin/product/create").post(
   isAuthenticated,
   authorizedRole("admin"),
   createProduct
 );
-ROUTER.route("/product/:id").put(
+ROUTER.route("/admin/product/:id").put(
   isAuthenticated,
   authorizedRole("admin"),
   updateProduct
 );
-ROUTER.route("/product/:id").delete(
+ROUTER.route("/admin/product/:id").delete(
   isAuthenticated,
   authorizedRole("admin"),
   deleteProduct
 );
-ROUTER.route("/product/:id").get(getProduct);
 
 module.exports = ROUTER;
