@@ -1,7 +1,6 @@
 const Product = require("../models/productSchema");
 const ErrorHandler = require("../utils/errorHandling");
 const User = require("../models/userSchema");
-const sendToken = require("../utils/token");
 const tryCatchError = require("../middlewares/tryCatchError");
 
 // created product here -- (only admin)
@@ -56,18 +55,68 @@ exports.deleteProduct = async (req, res, next) => {
   }
 };
 
-// register a user
-exports.registerUser = tryCatchError(async (req, res, next) => {
-  const { name, email, password } = req.body;
-  const user = await User.create({
-    name,
-    email,
-    password,
-    profilePic: {
-      url: "Check Url",
-      public_key: "profile key",
-    },
+// get all users
+exports.getAllUsers = tryCatchError(async (req, res, next) => {
+  const users = await User.find();
+  res.status(200).json({
+    success: true,
+    users,
+  });
+});
+
+// get a user by its id
+exports.getSingleUser = tryCatchError(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new ErrorHandler("User with this id does not exist", 400));
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+exports.updateUserRole = tryCatchError(async (req, res, next) => {
+  // name and email
+  //profile image to be later
+  const newUserDetails = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  let user = await User.findById(req.params.id);
+  if (!user) {
+    return next(new ErrorHandler("User with this id does not exist", 400));
+  }
+
+  user = await User.findByIdAndUpdate(req.params.id, newUserDetails, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
   });
 
-  sendToken(user, 201, res);
+  res.status(200).json({
+    success: true,
+    message: "profile updated successfully",
+  });
+});
+
+exports.deleteUser = tryCatchError(async (req, res, next) => {
+  // cloudinary to be removed later
+
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new ErrorHandler("User with this id does not exist", 400));
+  }
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "Account deleted successfully",
+  });
 });

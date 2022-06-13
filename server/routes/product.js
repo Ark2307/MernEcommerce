@@ -5,7 +5,13 @@ const {
   deleteProduct,
 } = require("../controllers/AdminTasks");
 
-const { getAllProducts, getProduct } = require("../controllers/Products");
+const {
+  getAllProducts,
+  getProduct,
+  createReview,
+  getAllReviews,
+  deleteReview,
+} = require("../controllers/Products");
 const {
   isAuthenticated,
   authorizedRole,
@@ -15,6 +21,9 @@ const ROUTER = express.Router();
 
 ROUTER.route("/products").get(getAllProducts);
 ROUTER.route("/product/:id").get(getProduct);
+ROUTER.route("/product/review").put(isAuthenticated, createReview);
+ROUTER.route("/product/reviews").get(getAllReviews);
+ROUTER.route("/product/reviews").delete(isAuthenticated, deleteReview);
 
 ROUTER.route("/admin/product/create").post(
   isAuthenticated,
