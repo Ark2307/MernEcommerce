@@ -4,6 +4,14 @@ const {
   authorizedRole,
 } = require("../middlewares/authentication");
 
+// orders controller methods
+const {
+  getSingleOrder,
+  getAllOrders,
+  updateOrder,
+  deleteOrder,
+} = require("../controllers/AdminTasks");
+
 // product controller methods
 const {
   createProduct,
@@ -18,8 +26,6 @@ const {
   deleteUser,
   updateUserRole,
 } = require("../controllers/AdminTasks");
-
-const { getSingleOrder } = require("../controllers/AdminTasks");
 
 const ROUTER = express.Router();
 
@@ -59,17 +65,35 @@ ROUTER.route("/user/:id").put(
   updateUserRole
 );
 
-ROUTER.route("/admin/user/:id").delete(
+ROUTER.route("/user/:id").delete(
   isAuthenticated,
   authorizedRole("admin"),
   deleteUser
 );
 
 // all admin order routes
-ROUTER.route("/:id").get(
+ROUTER.route("/order/:id").get(
   isAuthenticated,
   authorizedRole("admin"),
   getSingleOrder
+);
+
+ROUTER.route("/orders/all").get(
+  isAuthenticated,
+  authorizedRole("admin"),
+  getAllOrders
+);
+
+ROUTER.route("/order/:id").put(
+  isAuthenticated,
+  authorizedRole("admin"),
+  updateOrder
+);
+
+ROUTER.route("/order/:id").delete(
+  isAuthenticated,
+  authorizedRole("admin"),
+  deleteOrder
 );
 
 module.exports = ROUTER;

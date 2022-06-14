@@ -145,8 +145,60 @@ exports.getSingleOrder = tryCatchError(async (req, res, next) => {
 exports.getAllOrders = tryCatchError(async (req, res, next) => {
   const orders = await Order.find();
 
+  let totalEarnings = 0;
+  orders.forEach((order) => {
+    totalEarnings += order.totalPrice;
+  });
+
   res.status(200).json({
     success: true,
+    totalEarnings,
     orders,
+  });
+});
+
+// update orders{like status and payment received}
+exports.updateOrder = tryCatchError(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+  // console.log(order);
+
+  if (order.orderStatus === "Delivered") {
+    return next(new ErrorHandler("You have already delivered this order"), 400);
+  }
+
+  order.orderedProduct.forEach(async (order) => {
+    await updateStock(order.product, order.quantity);
+  });
+
+  order.orderStatus = req.body.status;
+  if (req.body.status === "Delivered") {
+    order.deliveredAt = Date.now();
+  }
+
+  await order.save({ validateBeforeSave: false });
+  res.status(200).json({
+    success: true,
+  });
+});
+
+async function updateStock(id, quantity) {
+  const product = await Product.findById(id);
+  product.stock -= quantity;
+
+  await product.save({ validateBeforeSave: false });
+}
+
+// delete orders from its id
+exports.deleteOrder = tryCatchError(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+
+  if (!order) {
+    return next(new ErrorHandler("Order with this id does not exist"), 400);
+  }
+
+  await order.remove();
+
+  res.status(200).json({
+    success: true,
   });
 });
