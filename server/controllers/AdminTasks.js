@@ -1,6 +1,7 @@
 const Product = require("../models/productSchema");
 const ErrorHandler = require("../utils/errorHandling");
 const User = require("../models/userSchema");
+const Order = require("../models/orderSchema");
 const tryCatchError = require("../middlewares/tryCatchError");
 
 // created product here -- (only admin)
@@ -78,6 +79,7 @@ exports.getSingleUser = tryCatchError(async (req, res, next) => {
   });
 });
 
+// update user force
 exports.updateUserRole = tryCatchError(async (req, res, next) => {
   // name and email
   //profile image to be later
@@ -104,6 +106,7 @@ exports.updateUserRole = tryCatchError(async (req, res, next) => {
   });
 });
 
+// delete user
 exports.deleteUser = tryCatchError(async (req, res, next) => {
   // cloudinary to be removed later
 
@@ -118,5 +121,32 @@ exports.deleteUser = tryCatchError(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "Account deleted successfully",
+  });
+});
+
+// get order by its id
+exports.getSingleOrder = tryCatchError(async (req, res, next) => {
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
+
+  if (!order) {
+    return next(new ErrorHandler("Order with this id does not exist"), 400);
+  }
+
+  res.status(200).json({
+    success: true,
+    order,
+  });
+});
+
+// get all orders
+exports.getAllOrders = tryCatchError(async (req, res, next) => {
+  const orders = await Order.find();
+
+  res.status(200).json({
+    success: true,
+    orders,
   });
 });
