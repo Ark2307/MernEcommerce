@@ -1,14 +1,18 @@
 import React from "react";
 import "./Header.css";
+import logo from "../../../images/logo.png";
 function Header() {
   return (
     <>
+      <a href="/">
+        <img className="logo" src={logo} alt="" />
+      </a>
       <input type="checkbox" id="active" />
-      <label for="active" class="menu-btn">
+      <label htmlFor="active" className="menu-btn">
         <span></span>
       </label>
-      <label for="active" class="close"></label>
-      <div class="wrapper">
+      <label htmlFor="active" className="close"></label>
+      <div className="wrapper">
         <ul>
           <li>
             <a href="/">Home</a>

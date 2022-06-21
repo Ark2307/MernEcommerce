@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.scss";
-import App from "../../images/App.png";
+import App from "../../../images/App.png";
 
 function Footer() {
   return (

@@ -1,0 +1,142 @@
+.titleAdd{
+    background-image: linear-gradient(to right , rgb(238, 157, 57) , rgba(247, 54, 160, 0.639));
+    height: 100vmin;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+
+    p{
+        font:300 1.5vmax ;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    h1{
+        margin: 2vmax;
+        font: 600 2.5vmax;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    a{
+        button{
+            cursor: pointer;
+            margin-bottom: 5vmax;
+            background-color: white;
+            border-radius: 2px;
+            border: 1px solid white;
+            width: 9vmax;
+            padding: 1vmax;
+            transition: all 0.5s;
+            font:500 1.4vmax;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            &:hover{
+                background-color: transparent;
+                color: white;
+                border: 1px solid black;
+            }
+        }
+    }
+
+    &:after{
+        content: "";
+        width: 100vw;
+        height: 100vmin;
+        background-color: white;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        max-width: 100%;
+        clip-path: polygon(100% 72%, 0% 100%, 100% 100%);
+
+    }
+}
+
+.homeTitle{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2.4vmax;
+    border-bottom: 1px solid rgba(20, 17, 17, 0.695);
+    width: 20vmax;
+    display: flex;
+    margin: 5vmax auto;
+}
+
+#container{
+    display: flex;
+    margin: 2vmax auto;
+    width: 80vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.productCard{
+    width: 16vmax;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: rgb(48,48,48);
+    margin: 2vmax;
+    padding-bottom: 0.5vmax;
+    transition: all 0.5s;
+
+    img{
+        width: 16vmax;
+    }
+
+    p{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 1.2vmax;
+        margin: 1.5vmax 0.5vmax;
+        margin-bottom: 0;
+    }
+
+    .cardComponent{
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .reviews{
+        margin-top: 0;
+        font-weight: 300;
+        font-size: 1vmax;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    span{
+        color: rgb(245, 30, 30);
+        margin:0.5vmax ;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 1.4vmax;
+        font-weight: 500;
+    }
+
+    &:hover{
+        box-shadow: 0 0 5px rgba(15,15,15,0.26);
+        transform: translateY(-1vmax);
+    }
+}
+
+@media screen and(max-width:600px) {
+    .productCard{
+        p{
+            font-size: 1.7vmax;
+        }
+        .cardComponent{
+            margin: 0vmax;
+            display: block;
+        }
+        .reviews{
+            margin-top: 0;
+            margin: 0 0.5vmax;
+            font-weight: 300;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 1.5vmax;
+        }
+
+        span{
+            font-size: 1.8vmax;
+        }
+
+    }
+}
