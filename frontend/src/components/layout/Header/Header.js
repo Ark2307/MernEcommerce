@@ -4,7 +4,7 @@ import logo from "../../../images/logo.png";
 function Header() {
   return (
     <>
-      <a href="/">
+      <a href="/#">
         <img className="logo" src={logo} alt="" />
       </a>
       <input type="checkbox" id="active" />

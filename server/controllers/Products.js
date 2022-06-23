@@ -6,7 +6,7 @@ const catchAsync = require("../middlewares/tryCatchError");
 
 // get all products
 exports.getAllProducts = catchAsync(async (req, res) => {
-  const resultPerPage = 7;
+  const resultPerPage = 8;
   const productCount = await Product.countDocuments();
 
   const apiFeature = new ApiFeatures(Product.find(), req.query)
