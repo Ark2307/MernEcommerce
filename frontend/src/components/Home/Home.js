@@ -10,15 +10,20 @@ import { getProduct } from "../../actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loading/Loader";
 
+import { useAlert } from "react-alert";
+
 function Home() {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, products, productCount } = useSelector(
     (state) => state.products
   );
 
   useEffect(() => {
+    if (error) return alert.error(error);
+
     dispatch(getProduct());
-  }, [dispatch]);
+  }, [dispatch, error, alert]);
 
   return (
     <Fragment>
@@ -42,7 +47,9 @@ function Home() {
           <span className="homeTitle">Featured Products</span>
           <div className="container" id="container">
             {products &&
-              products.map((product) => <Product product={product} />)}
+              products.map((product, id) => (
+                <Product product={product} key={id} />
+              ))}
           </div>
           <Footer />
         </>
