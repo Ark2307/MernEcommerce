@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import "./Home.scss";
 
-function Product({ product }) {
+function ProductCard({ product }) {
   const options = {
     edit: false,
     color: "rgba(20 , 20 , 20, 0.1)",
@@ -29,4 +29,4 @@ function Product({ product }) {
   );
 }
 
-export default Product;
+export default ProductCard;

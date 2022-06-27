@@ -28,7 +28,8 @@ exports.getAllProducts = catchAsync(async (req, res) => {
 // get a single product details
 exports.getProduct = async (req, res, next) => {
   try {
-    const product = await Product.findById(req.query.id);
+    // console.log(req.params.id);
+    const product = await Product.findById(req.params.id);
     if (!product) {
       return next(new ErrorHandler("Product Not Found", 404));
     }

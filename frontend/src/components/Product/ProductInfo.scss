@@ -1,13 +1,14 @@
 .productInfo {
   background-color: white ;
-  height: 100vh;
+  // height: 100vh;
   width: 100vw;
   max-width: 100%;
   padding: 10vmax;
   display: flex;
   box-sizing: border-box;
   margin-bottom: 0;
-
+  // box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  // box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   .carouselComponent{
     width: 100%;
     display: flex;
@@ -15,7 +16,7 @@
     justify-content: space-evenly;
     align-items: center;
     box-sizing: border-box;
-    border: 2px solid black;
+    border: 2px solid white;
 
 
     .productImage{
@@ -24,14 +25,17 @@
   }
 
   .infoComponent{
+    
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     box-sizing: border-box;
-    border: 2px solid black;
+    border: 2px solid white;
+    border-radius: 5px;
     padding: 1vmax ;
-
+    // box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
     .infoBlock-1{
       h2{
@@ -52,11 +56,11 @@
     .infoBlock-2{
       display: flex;
       align-items: center;
-      justify-content: center;
       border-top: 1px solid rgba(0, 0, 0, 0.205);
       border-bottom: 1px solid rgba(0, 0, 0, 0.205);
-      width: 70%;
+      width: 80%;
       padding: 1vmax 0;
+      margin-bottom: 1vmax;
 
       span{
         font-size: 0.8vmax;
@@ -66,7 +70,7 @@
     }
 
     .infoBlock-3{
-      width: 70%;
+      width: 80%;
       
       h1{
         color: rgba(17, 17, 17, 0.795);
@@ -78,7 +82,8 @@
 
       .infoBlock-3-1{
         display: flex;
-        align-items: center ;
+        // align-items: center ;
+        flex-direction: column;
 
         .infoBlock-3-1-1{
           button{
@@ -112,10 +117,13 @@
           color: white;
           transition: all 0.6s;
           background-color: rgb(244, 100, 23);
-          border-radius: 20px;
+          border-radius: 10px;
           padding: 0.5vmax 2vmax;
-          margin: 1vmax;
+          // margin: 1vmax;
+          margin-top: 1vmax;
+          margin-bottom: 1vmax;
           outline: none;
+          width: 10vmax;
 
           &:hover{
             background-color: rgb(59, 252, 62);
@@ -175,19 +183,73 @@
       
       &:hover{
         background-color: rgba(0, 98, 255, 0.9);
-        transform: scale(1.4);
+        transform: scale(1.2);
       }
     }
   }
 }
 
+.reviewsTitle{
+  color:rgba(13, 13, 13, 0.849) ;
+  font-size: 2vmax;
+  font-weight: 500;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 1vmax;
+  margin: auto;
+  margin-bottom: 3vmax;
+  width: 20vmax;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.225);
+  text-align: center;
+}
+
+.reviewComponent{
+  display: flex;
+  overflow: auto;
+}
+
+.reviewCard{
+  flex: none;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  width: 30vmax;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgb(56 , 56 , 56 , 0.9);
+  margin: 1vmax;
+  padding: 3vmax;
+
+  img{
+    width: 5vmax;
+  }
+
+  p{
+    color: rgba(0, 0, 0, 0.897);
+    font-size: 1vmax;
+    font-family: sans-serif;
+    font-weight: 600;
+  }
+
+  span{
+    font-size: 0.8vmax;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.5);
+    font-style: italic;
+  }
+}
+
+.noReviews{
+  font-weight: 400;
+  font-size: 1.5vmax;
+  text-align: center;
+  color: rgba(128, 128, 128, 0.835);
+}
 
 @media screen and (max-width:770px) {
 
   .productInfo {
     flex-direction: column;
     height: unset;
-
+    text-align: center;
     .carouselComponent{
       align-items: center;
       justify-content: center;
@@ -217,6 +279,8 @@
       }
 
       .infoBlock-3{
+        // justify-content: center;
+        // align-items: center;
         h1{
           font-weight: 700;
           font-size: 3vmax;
@@ -226,6 +290,8 @@
 
         .infoBlock-3-1{
           flex-direction: column;
+          align-items: center;
+          justify-content: center;
 
           .infoBlock-3-1-1{
             padding: 2vmax 0 ;
@@ -237,7 +303,7 @@
 
             input{
               padding: 1.5vmax ;
-              width: 5\vmax;
+              width: 5vmax;
               font-weight: 400;
               font-size: 1.8vmax;
               font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -280,6 +346,15 @@
         padding: 1vmax;
         margin: 2.5vmax 0;
       }
+    }
+  }
+
+  .reviewCard{
+    p{
+      font-size: 1.5vmax;
+    }
+    span{
+      font-size: 1.2vmax;
     }
   }
 }

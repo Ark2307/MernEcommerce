@@ -2,13 +2,14 @@ import React, { Fragment, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductInfo.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductDetails } from "../../actions/productActions";
+import { clearErrors, getProductDetails } from "../../actions/productActions";
 import { useParams } from "react-router-dom";
 import Loader from "../layout/Loading/Loader";
 import { useAlert } from "react-alert";
 import ReactStars from "react-rating-stars-component";
 import Header from "../layout/Header/Header";
 import Footer from "../layout/Footer/Footer";
+import ReviewCard from "./ReviewCard";
 
 function ProductInfo() {
   const dispatch = useDispatch();
@@ -28,7 +29,10 @@ function ProductInfo() {
   };
 
   useEffect(() => {
-    if (error) alert.error(error);
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
 
     dispatch(getProductDetails(id));
   }, [dispatch, id, error, alert]);
@@ -71,7 +75,7 @@ function ProductInfo() {
                 <div className="infoBlock-3-1">
                   <div className="infoBlock-3-1-1">
                     <button>-</button>
-                    <input value="1" type="number" />
+                    <input defaultValue="1" type="number" />
                     <button>+</button>
                   </div>
 
@@ -92,6 +96,20 @@ function ProductInfo() {
               <button className="submitReview">Submit Review</button>
             </div>
           </div>
+
+          <h2 className="reviewsTitle">REVIEWS</h2>
+          {product.reviews && product.reviews[0] ? (
+            <div className="reviewsComponent">
+              {product.reviews &&
+                product.reviews.map((review, id) => (
+                  <ReviewCard review={review} key={id} />
+                ))}
+            </div>
+          ) : (
+            <p className="noReviews">
+              Be the First one to Reviews this Product
+            </p>
+          )}
 
           <Footer />
         </>
