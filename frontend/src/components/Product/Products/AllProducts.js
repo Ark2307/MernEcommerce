@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
 
 import "./AllProducts.scss";
 import "./Pagination.scss";
@@ -12,10 +14,26 @@ import ProductCard from "../../Home/ProductCard";
 import Header from "../../layout/Header/Header";
 import Footer from "../../layout/Footer/Footer";
 
+// array for categories
+const categories = [
+  "Gadgets",
+  "Electric Devices",
+  "Clothing",
+  "Footwear",
+  "Accessories",
+  "Watches",
+  "Books",
+];
+
 function AllProducts() {
-  const { products, loading, error, productCount, resultPerPage } = useSelector(
-    (state) => state.products
-  );
+  const {
+    products,
+    loading,
+    error,
+    productCount,
+    resultPerPage,
+    filteredCount,
+  } = useSelector((state) => state.products);
 
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -24,8 +42,17 @@ function AllProducts() {
   // console.log(keyword);
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [price, setPrice] = useState([0, 25000]);
+  const [category, setCategory] = useState("");
+
+  // page number
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
+  };
+
+  // price filter handler
+  const priceHandler = (e, newPrice) => {
+    setPrice(newPrice);
   };
 
   useEffect(() => {
@@ -34,8 +61,10 @@ function AllProducts() {
       dispatch(clearErrors());
     }
 
-    dispatch(getProduct(keyword, currentPage));
-  }, [dispatch, error, alert, keyword, currentPage]);
+    dispatch(getProduct(keyword, currentPage, price, category));
+  }, [dispatch, error, alert, keyword, currentPage, price, category]);
+
+  let count = filteredCount;
 
   return (
     <Fragment>
@@ -52,7 +81,33 @@ function AllProducts() {
               ))}
           </div>
 
-          {resultPerPage < productCount ? (
+          {/* Add filters of categories and price here */}
+          <div className="filterBox">
+            <Typography>Price</Typography>
+            <Slider
+              value={price}
+              onChange={priceHandler}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              min={0}
+              max={25000}
+            />
+
+            <Typography>Categories</Typography>
+            <ul className="category-box">
+              {categories.map((category) => (
+                <li
+                  className="category-link"
+                  key={category}
+                  onClick={() => setCategory(category)}
+                >
+                  {category}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {resultPerPage < count ? (
             <div className="paginationBox">
               <Pagination
                 activePage={currentPage}

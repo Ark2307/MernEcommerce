@@ -48,3 +48,49 @@
         }
     }
 }
+
+
+
+// style here for react-js slider component
+.filterBox{
+    width: 12vmax;
+    position: absolute;
+    top: 5vmax;
+    left: 4vmax;
+}
+
+// style here for categories component
+.category-box{
+    padding: 0;
+    .category-link{
+        list-style: none;
+        color: rgb(76, 76, 76);
+        font-weight: 400;
+        font-size: 0.8vmax;
+        cursor: pointer;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        transition: all 0.5s;
+
+        &:hover{
+            color: orangered;
+        }
+    }
+}
+
+@media screen and (max-width:770px){
+    .filterBox{
+        width: 20vmax;
+        position: static;
+        margin: auto;
+    }
+
+    .page-link{
+        font-size: 1.8vmax;
+    }
+
+    .category-box{
+        .category-link{
+            font-size: 1.9vmax;
+        }
+    }
+}
