@@ -2,13 +2,16 @@ import React, { Fragment, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductInfo.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getProductDetails } from "../../actions/productActions";
+import {
+  clearErrors,
+  getProductDetails,
+} from "../../../actions/productActions";
 import { useParams } from "react-router-dom";
-import Loader from "../layout/Loading/Loader";
+import Loader from "../../layout/Loading/Loader";
 import { useAlert } from "react-alert";
 import ReactStars from "react-rating-stars-component";
-import Header from "../layout/Header/Header";
-import Footer from "../layout/Footer/Footer";
+import Header from "../../layout/Header/Header";
+import Footer from "../../layout/Footer/Footer";
 import ReviewCard from "./ReviewCard";
 
 function ProductInfo() {

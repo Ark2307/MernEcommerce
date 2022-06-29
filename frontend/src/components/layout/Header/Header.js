@@ -15,7 +15,7 @@ function Header() {
       <div className="wrapper">
         <ul>
           <li>
-            <a href="/">Home</a>
+            <a href="/search">Search</a>
           </li>
           <li>
             <a href="/about">About</a>

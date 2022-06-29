@@ -1,7 +1,7 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import "./ProductInfo.scss";
-import profilePic from "../../images/Profile.png";
+import profilePic from "../../../images/Profile.png";
 
 function ReviewCard({ review }) {
   const options = {

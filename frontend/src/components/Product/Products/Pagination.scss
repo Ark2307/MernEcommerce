@@ -1,0 +1,50 @@
+.paginationBox{
+    display: flex;
+    justify-content: center;
+    margin: 6vmax;
+
+    .pagination{
+        display: flex;
+        justify-content: center;
+        padding: 0;
+
+        .page-items{
+            background-color: white;
+            list-style: none;
+            border: 1.4px solid black;
+            padding: 0.8vmax 1.6vmax;
+            transition: all 0.5s;
+            cursor: pointer;
+
+            .page-link{
+                color: rgb(80, 80, 80);
+                text-decoration: none;
+                transition: all 0.5s;
+                font-weight: 300;
+                font-size: 1vmax;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                &:hover{
+                    color: black
+                }
+            }
+
+            &:hover{
+                background-color: rgb(201, 198, 198);
+            }
+        }
+        .page-items:first-child{
+            border-radius: 8px 0 0 8px;
+        }
+
+        .page-items:last-child{
+            border-radius: 0 8px 8px 0;
+        }
+
+        .pageItemActive{
+            background-color: tomato;
+        }
+        .pageLinkActive{
+            color: aqua;
+        }
+    }
+}
