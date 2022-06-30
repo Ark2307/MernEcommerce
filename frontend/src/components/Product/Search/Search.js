@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "./Search.scss";
-
 import { useNavigate } from "react-router-dom";
+
+import "./Search.scss";
+import UseHelmet from "../../layout/UseHelmet";
 
 function Search() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function Search() {
 
   return (
     <>
+      <UseHelmet title="Search --Apni Dukaan" />
       <form className="searchBox" onSubmit={handleSubmit}>
         <input
           className="input-1"

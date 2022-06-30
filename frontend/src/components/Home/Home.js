@@ -1,16 +1,16 @@
 import React, { Fragment, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useAlert } from "react-alert";
+import { CgMouse } from "react-icons/cg";
+
+import { clearErrors, getProduct } from "../../actions/productActions";
+
 import "./Home.scss";
 import Header from "../layout/Header/Header";
 import Footer from "../layout/Footer/Footer";
-import { CgMouse } from "react-icons/cg";
 import ProductCard from "./ProductCard";
 import UseHelmet from "../layout/UseHelmet";
-
-import { clearErrors, getProduct } from "../../actions/productActions";
-import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loading/Loader";
-
-import { useAlert } from "react-alert";
 
 function Home() {
   const alert = useAlert();

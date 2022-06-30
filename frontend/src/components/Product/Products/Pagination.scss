@@ -53,10 +53,15 @@
 
 // style here for react-js slider component
 .filterBox{
-    width: 12vmax;
+    width: 8vmax;
     position: absolute;
     top: 5vmax;
-    left: 4vmax;
+    left: 1vmax;
+
+    fieldset{
+        border: 1.5px solid rgb(0 , 0 , 0 , 0.298);
+        text-align: center;
+    }
 }
 
 // style here for categories component
@@ -64,7 +69,7 @@
     padding: 0;
     .category-link{
         list-style: none;
-        color: rgb(76, 76, 76);
+        color: rgb(0 , 0 , 0 , 0.298) ;
         font-weight: 400;
         font-size: 0.8vmax;
         cursor: pointer;

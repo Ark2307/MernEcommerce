@@ -1,18 +1,21 @@
 import React, { Fragment, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
-import "./ProductInfo.scss";
+import { useAlert } from "react-alert";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import ReactStars from "react-rating-stars-component";
+
 import {
   clearErrors,
   getProductDetails,
 } from "../../../actions/productActions";
-import { useParams } from "react-router-dom";
+
+import "./ProductInfo.scss";
 import Loader from "../../layout/Loading/Loader";
-import { useAlert } from "react-alert";
-import ReactStars from "react-rating-stars-component";
 import Header from "../../layout/Header/Header";
 import Footer from "../../layout/Footer/Footer";
 import ReviewCard from "./ReviewCard";
+import UseHelmet from "../../layout/UseHelmet";
 
 function ProductInfo() {
   const dispatch = useDispatch();
@@ -46,6 +49,7 @@ function ProductInfo() {
         <Loader />
       ) : (
         <>
+          <UseHelmet title={`${product.name} --APNI DUKAAN`} />
           <Header />
           <div className="productInfo">
             <div className="carouselComponent">

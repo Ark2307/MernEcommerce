@@ -13,6 +13,7 @@ import { getProduct, clearErrors } from "../../../actions/productActions";
 import ProductCard from "../../Home/ProductCard";
 import Header from "../../layout/Header/Header";
 import Footer from "../../layout/Footer/Footer";
+import UseHelmet from "../../layout/UseHelmet";
 
 // array for categories
 const categories = [
@@ -44,6 +45,7 @@ function AllProducts() {
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState("");
+  const [rating, setRating] = useState(0);
 
   // page number
   const setCurrentPageNo = (e) => {
@@ -61,8 +63,8 @@ function AllProducts() {
       dispatch(clearErrors());
     }
 
-    dispatch(getProduct(keyword, currentPage, price, category));
-  }, [dispatch, error, alert, keyword, currentPage, price, category]);
+    dispatch(getProduct(keyword, currentPage, price, category, rating));
+  }, [dispatch, error, alert, keyword, currentPage, price, category, rating]);
 
   let count = filteredCount;
 
@@ -72,6 +74,7 @@ function AllProducts() {
         <Loader />
       ) : (
         <>
+          <UseHelmet title="Products --APNI DUKAAN" />
           <Header />
           <h2 className="productTitle"> Products</h2>
           <div className="products">
@@ -105,6 +108,21 @@ function AllProducts() {
                 </li>
               ))}
             </ul>
+
+            {/* Ratings section here */}
+            <fieldset>
+              <Typography component="legend">Ratings</Typography>
+              <Slider
+                value={rating}
+                onChange={(e, newRating) => {
+                  setRating(newRating);
+                }}
+                valueLabelDisplay="auto"
+                aria-labelledby="continuous-slider"
+                min={0}
+                max={5}
+              />
+            </fieldset>
           </div>
 
           {resultPerPage < count ? (

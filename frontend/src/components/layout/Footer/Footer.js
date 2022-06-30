@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./Footer.scss";
 import App from "../../../images/App.png";
 
