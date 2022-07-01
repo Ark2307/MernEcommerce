@@ -1,0 +1,194 @@
+.loginContainer{
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0%;
+    left: 0;
+    position: fixed;
+    background-color: rgb(254, 225, 205);
+
+    .loginBox{
+        background-color: white;
+        width: 40vw;
+        height: 70vh;
+        box-sizing: border-box;
+        overflow: hidden;
+
+        .loginExtra{
+            .toggleLogin{
+                display: flex;
+                height: 3vmax;
+
+                p{
+                    color:rgba(0  , 0 , 0 , 0.7) ;
+                    display: grid;
+                    place-items: center;
+                    cursor: pointer;
+                    font-weight: 300;
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    font-size: 1.5vmax;
+                    transition: all 0.5s;
+                    width: 100%; 
+
+                    &:hover{
+                        color: orangered;
+                    }
+                }
+            }
+            button{
+                background-color: rgb(47, 175, 255);
+                height: 2.5px;
+                width: 50%;
+                border: none;
+                transition: all 0.5s;
+            }
+        }
+
+        .loginForm{
+            display: flex;
+            padding: 2vmax;
+            margin: auto;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 70%;
+            transition: all 0.5s;
+
+            .loginDetails{
+                display: flex;
+                width: 100%;
+                align-items: center;
+
+                input{
+                    padding : 1vmax 4vmax ;
+                    padding-right: 1vmax;
+                    width: 100%;
+                    box-sizing: border-box;
+                    border: 1px solid rgba(0  , 0 , 0 , 0.278);
+                    border-radius: 5px;
+                    font-weight: 400;
+                    font-size: 1vmax;
+                    outline: none;
+                }
+
+                svg{
+                    position: absolute;
+                    transform: translateX(1vmax);
+                    font-size: 1.7vmax;
+                    color: rgba(0  , 0 , 0 , 0.616) ;
+                }
+            }
+
+            a{
+                text-decoration: none;
+                align-self: flex-end;
+                color: rgb(0 , 0 , 0 , 616);
+                font-weight: 400;
+                font-style: italic;
+                font-size: 1vmax;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                transition: all 0.6s;
+
+                &:hover{
+                    color:rgb(33, 68, 245)
+                }
+            }
+
+            button{
+                border: none;
+                background-color: orangered;
+                color: white;
+                font-weight: 400;
+                font-size: 1vmax;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                width: 100%;
+                padding: 1.2vmax;
+                border-radius: 5px;
+                outline: none;
+                transition: all 0.6s;
+                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+                &:hover{
+                    background-color:rgb(241, 105, 75);
+                    color: black;
+                    transform: translateY(4px);
+                }
+            }
+        }
+    }
+}
+
+#signupImage{
+    input::file-selector-button{
+        cursor: pointer;
+        
+    }
+}
+
+.signup{
+    transform: translateY(-100%) translateX(-100vmax);
+}
+
+.shiftToLeft{
+    transform: translateX(-100%);
+}
+
+.shiftToRight{
+    transform: translateX(100%);
+}
+
+.shiftToNeutral{
+    transform: translateX(0%);
+}
+
+.shiftToNeutralForm{
+    transform: translateX(0%) translateY(-100%);
+
+}
+
+@media screen and (max-width : 770px) {
+    .loginContainer{
+        background-color: white;
+
+        .loginBox{
+            width: 100vw;
+            height: 95vh;
+
+            .loginExtra{
+                .toggleLogin{
+                    height: 5vmax;
+
+                    p{
+                        font-size: 2vmax;
+                    }
+                }
+            }
+
+            .loginForm{
+                padding: 6vmax;
+
+                .loginDetails{
+                    input{
+                        padding: 2.5vmax 5vmax;
+                        font-size: 1.8vmax;
+                    }
+
+                    svg{
+                        font-size: 2.7vmax;
+                    }
+                }
+                a{
+                    font-size: 1.6vmax;
+                    font-weight: 500;
+                }
+                button{
+                    height: 7vh;
+                    font-size: 1.8vmax;
+                }
+            }
+        }
+    }
+}
