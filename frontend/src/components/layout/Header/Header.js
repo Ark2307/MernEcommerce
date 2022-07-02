@@ -1,13 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import "./Header.css";
-import logo from "../../../images/logo.png";
+import UserProfile from "./UserProfile";
 function Header() {
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+
   return (
     <>
-      <a href="/#">
-        <img className="logo" src={logo} alt="" />
-      </a>
+      {isAuthenticated && <UserProfile user={user} />}
       <input type="checkbox" id="active" />
       <label htmlFor="active" className="menu-btn">
         <span></span>
@@ -15,6 +16,9 @@ function Header() {
       <label htmlFor="active" className="close"></label>
       <div className="wrapper">
         <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
           <li>
             <a href="/search">Search</a>
           </li>

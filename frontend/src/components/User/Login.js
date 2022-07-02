@@ -18,7 +18,9 @@ function Login() {
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const { error, loading } = useSelector((state) => state.user);
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -95,18 +97,16 @@ function Login() {
     }
   };
 
-  const token = localStorage.getItem("token");
-
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
 
-    if (token) {
+    if (isAuthenticated) {
       navigate("/profile");
     }
-  }, [dispatch, error, alert, token, navigate]);
+  }, [dispatch, error, alert, isAuthenticated, navigate]);
 
   return (
     <>

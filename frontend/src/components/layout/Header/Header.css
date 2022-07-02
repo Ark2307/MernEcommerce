@@ -1,15 +1,4 @@
-.logo{
-    margin-top: 20px;
-    position: fixed;
-    left: 0;
-    height: 50px;
-    cursor: pointer;
-    height: 56px;
-    width: 68px;
-    border-radius: 50%;
-  }
-  
-  .wrapper{
+ .wrapper{
       position: fixed;
       top: 0;
       /*left: -100%;*/
@@ -26,14 +15,14 @@
       position: absolute;
       position: fixed;
       z-index: 2;
-      right: 20px;
-      top: 20px;
+      left: 15px;
+      top: 2vmax;
       height: 50px;
       width: 50px;
       text-align: center;
       line-height: 50px;
       border-radius: 50%;
-      font-size: 20px;
+      font-size: 30px;
       cursor: pointer;
       transition: all 0.3s ease-in-out;
     }

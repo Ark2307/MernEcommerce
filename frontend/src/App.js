@@ -1,13 +1,21 @@
-import "./App.css";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import { loadUser } from "./actions/userActions";
+
+import "./App.css";
 import Home from "./components/Home/Home";
 import ProductInfo from "./components/Product/ProductDetails/ProductInfo";
 import AllProducts from "./components/Product/Products/AllProducts";
 import Search from "./components/Product/Search/Search";
 import Login from "./components/User/Login";
+import store from "./reactStore";
 
 function App() {
+  React.useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
     <Router>
       <Routes>
