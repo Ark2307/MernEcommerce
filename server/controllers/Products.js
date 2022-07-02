@@ -11,17 +11,23 @@ exports.getAllProducts = catchAsync(async (req, res) => {
 
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
-    .filter()
-    .pagination(resultPerPage);
+    .filter();
 
   // now as search function has returned the class with keyword
   // we can use all of its methods
 
-  const products = await apiFeature.query;
+  let products = await apiFeature.query;
+  let filteredCount = products.length;
+
+  apiFeature.pagination(resultPerPage);
+
+  // const products = await apiFeature.query;
   res.status(201).json({
     success: true,
     products,
     productCount,
+    resultPerPage,
+    filteredCount,
   });
 });
 

@@ -1,27 +1,39 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOpenIcon from "@mui/icons-material/LockOpenOutlined";
 import FaceIcon from "@mui/icons-material/FaceOutlined";
 import AvatarIcon from "@mui/icons-material/AccountCircleOutlined";
+import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
+
+import { login, clearErrors, signup } from "../../actions/userActions";
 
 import "./Login.scss";
+import Loader from "../layout/Loading/Loader";
+import UseHelmet from "../layout/UseHelmet";
 
 function Login() {
-  const loginTab = useRef(null);
-  const signupTab = useRef(null);
-  const switcherTab = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const alert = useAlert();
+
+  const { error, loading } = useSelector((state) => state.user);
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
+  const loginTab = useRef(null);
+  const signupTab = useRef(null);
+  const switcherTab = useRef(null);
 
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
-
-  const { name, email, password } = user;
+  const { name, email, password, confirmPassword } = user;
 
   const [avatarPreview, setAvatarPreview] = useState();
   const [avatar, setAvatar] = useState();
@@ -48,7 +60,7 @@ function Login() {
   // Login Function
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitted");
+    dispatch(login(loginEmail, loginPassword));
   };
 
   //Signup Function
@@ -59,9 +71,11 @@ function Login() {
     signupForm.set("name", name);
     signupForm.set("email", email);
     signupForm.set("password", password);
+    signupForm.set("confirmPassword", confirmPassword);
     signupForm.set("avatar", avatar);
 
-    console.log("Signup submitted");
+    // console.log("Signup submitted");
+    dispatch(signup(signupForm));
   };
 
   // Signup change function
@@ -81,102 +95,136 @@ function Login() {
     }
   };
 
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+
+    if (token) {
+      navigate("/profile");
+    }
+  }, [dispatch, error, alert, token, navigate]);
+
   return (
     <>
-      <div className="loginContainer">
-        <div className="loginBox">
-          <div className="loginExtra">
-            <div className="toggleLogin">
-              <p onClick={(e) => switchTabs(e, "login")}>Login</p>
-              <p onClick={(e) => switchTabs(e, "signup")}>Signup</p>
+      <UseHelmet title="Welcome User --ApniDukaan" />
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="loginContainer">
+          <div className="loginBox">
+            <div className="loginExtra">
+              <div className="toggleLogin">
+                <p onClick={(e) => switchTabs(e, "login")}>Login</p>
+                <p onClick={(e) => switchTabs(e, "signup")}>Signup</p>
+              </div>
+              <button ref={switcherTab} />
             </div>
-            <button ref={switcherTab} />
+
+            <form
+              className="loginForm"
+              onSubmit={handleLoginSubmit}
+              ref={loginTab}
+            >
+              <div className="loginDetails">
+                <MailOutlineIcon />
+
+                <input
+                  type="email"
+                  placeholder="Email"
+                  required
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="loginDetails">
+                <LockOpenIcon />
+
+                <input
+                  type="password"
+                  placeholder="Password"
+                  required
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                />
+              </div>
+              <Link to="/password/forget">Forget Password</Link>
+              <button type="submit">Login</button>
+            </form>
+
+            <form
+              className="loginForm signup"
+              onSubmit={handleSignupSubmit}
+              ref={signupTab}
+            >
+              <div className="loginDetails">
+                <FaceIcon />
+                <input
+                  type="text"
+                  placeholder="Name"
+                  required
+                  name="name"
+                  value={name}
+                  onChange={handleSignupChange}
+                />
+              </div>
+
+              <div className="loginDetails">
+                <MailOutlineIcon />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  required
+                  name="email"
+                  value={email}
+                  onChange={handleSignupChange}
+                />
+              </div>
+
+              <div className="loginDetails">
+                <LockOpenIcon />
+
+                <input
+                  type="password"
+                  placeholder="Password"
+                  required
+                  name="password"
+                  value={password}
+                  onChange={handleSignupChange}
+                />
+              </div>
+
+              <div className="loginDetails">
+                <LockOpenIcon />
+
+                <input
+                  type="password"
+                  placeholder="Re-Enter your Password"
+                  required
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={handleSignupChange}
+                />
+              </div>
+
+              <div className="loginDetails" id="signupImage">
+                <AvatarIcon />
+                <input
+                  type="file"
+                  name="avatar"
+                  accept="image/*"
+                  onChange={handleSignupChange}
+                />
+              </div>
+              <button type="submit">Signup</button>
+            </form>
           </div>
-
-          <form
-            className="loginForm"
-            onSubmit={handleLoginSubmit}
-            ref={loginTab}
-          >
-            <div className="loginDetails">
-              <MailOutlineIcon />
-
-              <input
-                type="email"
-                placeholder="Email"
-                required
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-              />
-            </div>
-
-            <div className="loginDetails">
-              <LockOpenIcon />
-
-              <input
-                type="password"
-                placeholder="Password"
-                required
-                value={loginPassword}
-                onChange={(e) => setLoginPassword(e.target.value)}
-              />
-            </div>
-            <Link to="/password/forget">Forget Password</Link>
-            <button type="submit">Login</button>
-          </form>
-
-          <form
-            className="loginForm signup"
-            onSubmit={handleSignupSubmit}
-            ref={signupTab}
-          >
-            <div className="loginDetails">
-              <FaceIcon />
-              <input
-                type="text"
-                placeholder="Name"
-                required
-                value={name}
-                onChange={handleSignupChange}
-              />
-            </div>
-
-            <div className="loginDetails">
-              <MailOutlineIcon />
-              <input
-                type="email"
-                placeholder="Email"
-                required
-                value={email}
-                onChange={handleSignupChange}
-              />
-            </div>
-
-            <div className="loginDetails">
-              <LockOpenIcon />
-
-              <input
-                type="password"
-                placeholder="Password"
-                required
-                value={password}
-                onChange={handleSignupChange}
-              />
-            </div>
-
-            <div className="loginDetails" id="signupImage">
-              <AvatarIcon />
-              <input
-                type="file"
-                name="avatar"
-                accept="image/*"
-                onChange={handleSignupChange}
-              />
-            </div>
-            <button type="submit">Signup</button>
-          </form>
         </div>
-      </div>
+      )}
     </>
   );
 }

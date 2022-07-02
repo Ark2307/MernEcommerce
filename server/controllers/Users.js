@@ -3,16 +3,28 @@ const catchAsyncErrors = require("../middlewares/tryCatchError");
 const User = require("../models/userSchema");
 const sendToken = require("../utils/token");
 
+const cloudinary = require("cloudinary");
+
 // register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
+  if (password !== confirmPassword) {
+    return next(new ErrorHandler("Passwords do not match", 400));
+  }
+
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+
   const user = await User.create({
     name,
     email,
     password,
     profilePic: {
-      url: "Check Url",
-      public_key: "profile key",
+      url: myCloud.secure_url,
+      public_key: myCloud.public_id,
     },
   });
 
