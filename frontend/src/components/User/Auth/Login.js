@@ -7,11 +7,11 @@ import AvatarIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 
-import { login, clearErrors, signup } from "../../actions/userActions";
+import { login, clearErrors, signup } from "../../../actions/userActions";
 
 import "./Login.scss";
-import Loader from "../layout/Loading/Loader";
-import UseHelmet from "../layout/UseHelmet";
+import Loader from "../../layout/Loading/Loader";
+import UseHelmet from "../../layout/UseHelmet";
 
 function Login() {
   const dispatch = useDispatch();

@@ -12,8 +12,6 @@ import {
 
 import "./ProductInfo.scss";
 import Loader from "../../layout/Loading/Loader";
-import Header from "../../layout/Header/Header";
-import Footer from "../../layout/Footer/Footer";
 import ReviewCard from "./ReviewCard";
 import UseHelmet from "../../layout/UseHelmet";
 
@@ -50,7 +48,7 @@ function ProductInfo() {
       ) : (
         <>
           <UseHelmet title={`${product.name} --APNI DUKAAN`} />
-          <Header />
+
           <div className="productInfo">
             <div className="carouselComponent">
               <Carousel>
@@ -117,8 +115,6 @@ function ProductInfo() {
               Be the First one to Reviews this Product
             </p>
           )}
-
-          <Footer />
         </>
       )}
     </Fragment>

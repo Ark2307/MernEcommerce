@@ -11,8 +11,6 @@ import "./Pagination.scss";
 import Loader from "../../layout/Loading/Loader";
 import { getProduct, clearErrors } from "../../../actions/productActions";
 import ProductCard from "../../Home/ProductCard";
-import Header from "../../layout/Header/Header";
-import Footer from "../../layout/Footer/Footer";
 import UseHelmet from "../../layout/UseHelmet";
 
 // array for categories
@@ -75,7 +73,6 @@ function AllProducts() {
       ) : (
         <>
           <UseHelmet title="Products --APNI DUKAAN" />
-          <Header />
           <h2 className="productTitle"> Products</h2>
           <div className="products">
             {products &&
@@ -145,8 +142,6 @@ function AllProducts() {
           ) : (
             ""
           )}
-
-          <Footer />
         </>
       )}
     </Fragment>

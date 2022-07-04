@@ -6,8 +6,6 @@ import { CgMouse } from "react-icons/cg";
 import { clearErrors, getProduct } from "../../actions/productActions";
 
 import "./Home.scss";
-import Header from "../layout/Header/Header";
-import Footer from "../layout/Footer/Footer";
 import ProductCard from "./ProductCard";
 import UseHelmet from "../layout/UseHelmet";
 import Loader from "../layout/Loading/Loader";
@@ -35,7 +33,6 @@ function Home() {
       ) : (
         <>
           <UseHelmet title="APNI DUKAAN" />
-          <Header />
           <div className="titleAdd">
             <p> Welcome to Apni Dukaan </p>
             <h1> The Amazing products at your Doorstep</h1>
@@ -54,7 +51,6 @@ function Home() {
                 <ProductCard product={product} key={id} />
               ))}
           </div>
-          <Footer />
         </>
       )}
     </Fragment>
