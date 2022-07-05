@@ -16,6 +16,9 @@ import AuthenticatedRoute from "./components/Routes/AuthenticatedRoute";
 import store from "./reactStore";
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
+import UpdatePassword from "./components/User/Passwords/UpdatePassword";
+import ForgetPassword from "./components/User/Passwords/ForgetPassword";
+import ResetPassword from "./components/User/Passwords/ResetPassword";
 
 function App() {
   React.useEffect(() => {
@@ -39,6 +42,18 @@ function App() {
             exact
             path="/profile/edit"
             element={<AuthenticatedRoute Component={EditProfile} />}
+          />
+          <Route
+            exact
+            path="/user/password/update"
+            element={<AuthenticatedRoute Component={UpdatePassword} />}
+          />
+
+          <Route exact path="/password/forget" element={<ForgetPassword />} />
+          <Route
+            exact
+            path="/password/reset/:token"
+            element={<ResetPassword />}
           />
           <Route exact path="/products" element={<AllProducts />} />
           <Route exact path="/search" element={<Search />} />

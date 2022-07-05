@@ -5,6 +5,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import LisToAltIcon from "@mui/icons-material/ListAlt";
+import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
@@ -21,11 +22,16 @@ function UserProfile({ user }) {
     { icon: <LisToAltIcon />, name: "Orders", func: orders },
     { icon: <PersonIcon />, name: "Profile", func: profile },
     { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
+    { icon: <EditIcon />, name: "Edit Profile", func: edProf },
   ];
   const alert = useAlert();
 
   function dashboard() {
     navigate("/dashboard");
+  }
+
+  function edProf() {
+    navigate("/profile/edit");
   }
 
   function orders() {
