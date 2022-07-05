@@ -1,0 +1,11 @@
+.headerComponent{
+  position: fixed;
+  left: 2vmax;
+  top: 2vmax;
+
+  .headerIcon{
+      width: 28px;
+      height: 28px;
+      border-radius: 100%;
+  }
+}

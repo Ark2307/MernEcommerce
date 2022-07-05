@@ -4,6 +4,7 @@ const User = require("../models/userSchema");
 const sendToken = require("../utils/token");
 
 const cloudinary = require("cloudinary");
+const { findById } = require("../models/userSchema");
 
 // register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -98,11 +99,28 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 // update user profile
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   // name and email
-  //profile image to be later
   const newUserDetails = {
     name: req.body.name,
     email: req.body.email,
   };
+
+  if (req.body.profilePic !== "") {
+    const user = await User.findById(req.user.id);
+    const imgId = user.profilePic.public_key;
+
+    await cloudinary.v2.uploader.destroy(imgId);
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    newUserDetails.profilePic = {
+      url: myCloud.secure_url,
+      public_key: myCloud.public_id,
+    };
+  }
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserDetails, {
     new: true,

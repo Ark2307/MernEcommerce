@@ -1,42 +1,71 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
+import { SpeedDial, SpeedDialAction } from "@mui/material";
+import BackDrop from "@mui/material/Backdrop";
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
+import LoginIcon from "@mui/icons-material/Login";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import Bars from "@mui/icons-material/Menu";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import "./Header.css";
+import "./Header.scss";
 import UserProfile from "./UserProfile";
+
 function Header() {
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const options = [
+    { icon: <HomeIcon />, name: "Home", func: home },
+    { icon: <SearchIcon />, name: "Search", func: search },
+    { icon: <ShoppingBagIcon />, name: "Products", func: products },
+  ];
+
+  function home() {
+    navigate("/");
+  }
+
+  function search() {
+    navigate("/search");
+  }
+
+  function products() {
+    navigate("/products");
+  }
+
+  function isLogin() {
+    navigate("/login");
+  }
+
   const { user, isAuthenticated } = useSelector((state) => state.user);
 
+  if (!isAuthenticated) {
+    options.push({ icon: <LoginIcon />, name: "Login", func: isLogin });
+  }
+
   return (
-    <>
+    <Fragment>
       {isAuthenticated && <UserProfile user={user} />}
-      <input type="checkbox" id="active" />
-      <label htmlFor="active" className="menu-btn">
-        <span></span>
-      </label>
-      <label htmlFor="active" className="close"></label>
-      <div className="wrapper">
-        <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/search">Search</a>
-          </li>
-          <li>
-            <a href="/about">About</a>
-          </li>
-          <li>
-            <a href="/products">Products</a>
-          </li>
-          <li>
-            <a href="/profile">Profile</a>
-          </li>
-          <li>
-            <a href="/dashboard">Dashboard</a>
-          </li>
-        </ul>
-      </div>
-    </>
+      <BackDrop open={open} />
+      <SpeedDial
+        className="headerComponent"
+        ariaLabel="headerAvatar"
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        open={open}
+        direction="down"
+        icon={<Bars className="headerIcon" htmlColor="black" />}
+      >
+        {options.map((index) => (
+          <SpeedDialAction
+            key={index.name}
+            icon={index.icon}
+            tooltipTitle={index.name}
+            onClick={index.func}
+          />
+        ))}
+      </SpeedDial>
+    </Fragment>
   );
 }
 
