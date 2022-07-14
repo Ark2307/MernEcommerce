@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import LoginIcon from "@mui/icons-material/Login";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import Bars from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -19,6 +20,7 @@ function Header() {
     { icon: <HomeIcon />, name: "Home", func: home },
     { icon: <SearchIcon />, name: "Search", func: search },
     { icon: <ShoppingBagIcon />, name: "Products", func: products },
+    { icon: <ShoppingCartIcon />, name: "Cart", func: addCart },
   ];
 
   function home() {
@@ -35,6 +37,10 @@ function Header() {
 
   function isLogin() {
     navigate("/login");
+  }
+
+  function addCart() {
+    navigate("/cart");
   }
 
   const { user, isAuthenticated } = useSelector((state) => state.user);

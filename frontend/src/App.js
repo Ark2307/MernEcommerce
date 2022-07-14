@@ -19,6 +19,7 @@ import Footer from "./components/layout/Footer/Footer";
 import UpdatePassword from "./components/User/Passwords/UpdatePassword";
 import ForgetPassword from "./components/User/Passwords/ForgetPassword";
 import ResetPassword from "./components/User/Passwords/ResetPassword";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   React.useEffect(() => {
@@ -58,6 +59,7 @@ function App() {
           <Route exact path="/products" element={<AllProducts />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/products/:keyword" element={<AllProducts />} />
         </Routes>
         <Footer />

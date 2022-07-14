@@ -1,9 +1,8 @@
 const Order = require("../models/orderSchema");
 const catchAsync = require("../middlewares/tryCatchError");
-const ErrorHandler = require("../utils/errorHandling");
 
 // create a new order
-exports.creatOrder = catchAsync(async (req, res, next) => {
+exports.createOrder = catchAsync(async (req, res, next) => {
   const {
     addressInfo,
     orderedProduct,
