@@ -6,8 +6,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import LisToAltIcon from "@mui/icons-material/ListAlt";
 import EditIcon from "@mui/icons-material/Edit";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 
 import { logout } from "../../../actions/userActions";
@@ -18,16 +19,32 @@ function UserProfile({ user }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
+  const { cartItems } = useSelector((state) => state.cart);
+
   const options = [
     { icon: <LisToAltIcon />, name: "Orders", func: orders },
     { icon: <PersonIcon />, name: "Profile", func: profile },
-    { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
     { icon: <EditIcon />, name: "Edit Profile", func: edProf },
+    {
+      icon: (
+        <ShoppingCartIcon
+          style={{ color: cartItems.length > 0 ? "orangered" : "unset" }}
+        />
+      ),
+      name: `My Cart(${cartItems.length})`,
+      func: cart,
+    },
+    { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
   ];
   const alert = useAlert();
 
   function dashboard() {
     navigate("/dashboard");
+  }
+
+  function cart() {
+    navigate("/cart");
   }
 
   function edProf() {
