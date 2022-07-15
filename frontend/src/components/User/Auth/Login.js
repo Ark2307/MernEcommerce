@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOpenIcon from "@mui/icons-material/LockOpenOutlined";
 import FaceIcon from "@mui/icons-material/FaceOutlined";
@@ -17,6 +17,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
+  const location = useLocation();
 
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
@@ -97,6 +98,8 @@ function Login() {
     }
   };
 
+  const redirect = location.search ? location.search.split("=")[1] : "/profile";
+
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -104,9 +107,9 @@ function Login() {
     }
 
     if (isAuthenticated) {
-      navigate("/profile");
+      navigate(redirect);
     }
-  }, [dispatch, error, alert, isAuthenticated, navigate]);
+  }, [dispatch, error, alert, isAuthenticated, navigate, redirect]);
 
   return (
     <>
