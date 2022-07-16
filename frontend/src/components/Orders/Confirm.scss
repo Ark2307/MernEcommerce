@@ -1,0 +1,268 @@
+.confirmOrderPage{
+    height: 100vh;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 6fr 3fr;
+
+    .pageSection{
+
+        .addressArea{
+            padding: 5vmax;
+            padding-bottom: 0%;
+
+            p{
+                font-weight: 400;
+                font-size: 1.8vmax;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+
+            .addressAreaBox{
+                margin: 2vmax;
+                
+                .userDetails{
+                    display: flex;
+                    margin: 1vmax 0;
+
+                    span{
+                        margin: 0 1vmax;
+                        font-weight: 100;
+                        font-size: 1vmax;
+                        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                        color: #575757;
+                    }
+                    
+                    p{
+                        font-size: 1vmax;
+                        font-weight: 400;
+                        color: black;
+                        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    }
+                }
+            }
+        }
+
+        .cartItems{
+            padding: 5vmax;
+            padding-top: 2vmax;
+
+            p{
+                font-weight: 400;
+                font-size: 1.8vmax;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+    
+            .cartItemsContainer{
+                max-height: 20vmax;
+                overflow-y: auto;
+                margin: 2vmax;
+
+                div{
+                    display: flex;
+                    font-weight: 400;
+                    font-size: 1vmax;
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin: 2vmax 0;
+
+                    img{
+                        width: 3vmax;
+                    }
+
+                    span{
+                        font-weight: 100;
+                        font-size: 1vmax;
+                        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                        color: #5e5e5e;
+                    }
+
+                    a{
+                        color: #575757;
+                        margin: 0 2vmax;
+                        width: 60%;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .pageSectionRight{
+        border-left: 1px solid rgba(0, 0, 0, 0.247);
+        
+        .orderSummary{
+            padding: 5vmax;
+
+            p{
+                text-align: center;
+                font-weight: 400;
+                font-size: 1.4vmax;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.267);
+                padding: 1vmax;
+                width: 80%;
+                box-sizing: border-box;
+            }
+
+            .chargesTypes{
+
+                div{
+                    display: flex;
+                    font-weight: 300;
+                    font-size: 1vmax;
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin: 1.5vmax 0;
+
+                    p{
+                        text-align: left;
+                    }
+
+                    span{
+                        color: rgba(0, 0, 0, 0.692);
+                        text-align: left;
+                    }
+
+                }
+            }
+
+            .orderSummaryTotal{
+                display: flex;
+                font-weight: 300 ;
+                font-size:  1vmax ;
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+                align-items: center;
+                justify-content: space-between;
+                border-top: 1px solid rgba(0, 0, 0, 0.363);
+                padding: 2vmax 0;
+
+
+                p{
+                    text-align: left;
+                }
+            }
+
+            button{
+                background-color: orangered;
+                color: white;
+                width: 100%;
+                padding: 1vmax;
+                border: none;
+                border-radius: 6px;
+                margin: auto;
+                cursor: pointer;
+                transition: 0.5s;
+                font-weight: 400 ;
+                font-size: 1vmax ;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+                &:hover{
+                    background-color: tomato;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:770px){
+    .confirmOrderPage{
+        grid-template-columns: 1fr;
+        height: unset;
+        .pageSection{
+    
+            .addressArea{
+                
+                p{
+                    font-size: 2.4vmax;    
+                }
+    
+                .addressAreaBox{
+    
+                    .userDetails{
+                        display: flex;
+                        margin: 1.7vmax 0;
+                        span{
+                            font-size: 2vmax;
+                        }
+                        p{
+                            font-size: 2vmax;
+                        }
+                    }
+                }
+            }
+    
+            .cartItems{
+            
+                p{
+                    font-size: 2.4vmax;
+                }
+        
+                .cartItemsContainer{
+                    max-height: 50vw;
+
+                    div{
+                        margin: 1.5vmax 0;
+                        font-size: 2vmax;
+
+                        img{
+                            width: 5vmax;
+                        }
+    
+                        span{
+                            font-size: 1.8vmax;
+                        }
+    
+                        a{
+                            margin: 0;
+                            width: 30%;
+                        }
+                    }
+                }
+            }
+        }
+    
+        .pageSectionRight{
+            border-left: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.247);
+
+            .orderSummary{
+                padding: 5vmax;
+                p{
+                    width: 100%;
+                    padding: 2vmax;
+                    font-size: 2.4vmax;
+                }
+    
+                .chargesTypes{
+                    div{
+                        p{
+                            font-size: 2vmax;
+                        }
+    
+                        span{
+                            width: 20%;
+                            padding-left: 2vmax;
+                            font-size: 1.8vmax;
+                        }
+    
+                    }
+                }
+    
+                .orderSummaryTotal{
+                    font-size: 2vmax;
+                    
+                    span{
+                        width: 20%;
+                    }
+                }
+    
+                button{
+                    padding: 2vmax;
+                    margin: 1.5vmax auto;
+                    font-size: 1.5vmax;
+                }
+            }
+        }
+    }
+}

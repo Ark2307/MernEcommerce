@@ -21,6 +21,7 @@ import ForgetPassword from "./components/User/Passwords/ForgetPassword";
 import ResetPassword from "./components/User/Passwords/ResetPassword";
 import Cart from "./components/Cart/Cart";
 import ShippingInfo from "./components/Orders/ShippingInfo";
+import Confirm from "./components/Orders/Confirm";
 
 function App() {
   React.useEffect(() => {
@@ -55,6 +56,12 @@ function App() {
             exact
             path="/login/shipping"
             element={<AuthenticatedRoute Component={ShippingInfo} />}
+          />
+
+          <Route
+            exact
+            path="/order/confirm"
+            element={<AuthenticatedRoute Component={Confirm} />}
           />
 
           <Route exact path="/password/forget" element={<ForgetPassword />} />
