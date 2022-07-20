@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { loadUser } from "./actions/userActions";
@@ -22,11 +22,12 @@ import ResetPassword from "./components/User/Passwords/ResetPassword";
 import Cart from "./components/Cart/Cart";
 import ShippingInfo from "./components/Orders/ShippingInfo";
 import Confirm from "./components/Orders/Confirm";
+import Payment from "./components/Orders/Payment";
 
 function App() {
-  React.useEffect(() => {
+  useEffect(() => {
     store.dispatch(loadUser());
-  });
+  }, []);
 
   return (
     <Router>
@@ -40,7 +41,6 @@ function App() {
             path="/profile"
             element={<AuthenticatedRoute Component={Profile} />}
           />
-
           <Route
             exact
             path="/profile/edit"
@@ -62,6 +62,12 @@ function App() {
             exact
             path="/order/confirm"
             element={<AuthenticatedRoute Component={Confirm} />}
+          />
+
+          <Route
+            exact
+            path="/order/payment"
+            element={<AuthenticatedRoute Component={Payment} />}
           />
 
           <Route exact path="/password/forget" element={<ForgetPassword />} />

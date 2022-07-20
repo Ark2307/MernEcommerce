@@ -2,6 +2,10 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   SHIPPING_INFO,
+  CLEAR_ERRORS,
+  CREATE_ORDER_FAIL,
+  CREATE_ORDER_REQUEST,
+  CREATE_ORDER_SUCCESS,
 } from "../constants/placeOrder";
 
 export const addToCartReducer = (
@@ -39,6 +43,37 @@ export const addToCartReducer = (
       return {
         ...state,
         shippingInfo: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const createOrderReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CREATE_ORDER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case CREATE_ORDER_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case CREATE_ORDER_SUCCESS:
+      return {
+        loading: false,
+        order: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
       };
 
     default:

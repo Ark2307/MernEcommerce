@@ -1,0 +1,96 @@
+.paymentContainer{
+    display: grid;
+    place-items: center;
+    background-color: rgb(255, 255, 255);
+    height: 65vh;
+    margin: 2vmax;
+
+    .paymentForm{
+        width: 32%;
+        height: 100%;
+
+        p{
+            color: rgba(0, 0, 0, 0.753);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+            padding: 1vmax 0;
+            text-align: center;
+            width: 50%;
+            margin: auto;
+            font-weight: 400;
+            font-size: 2vmax;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;            
+        }
+
+        div{
+            display: flex;
+            align-items: center;
+            margin: 1.5vmax 0;
+                        
+            .paymentField{
+                padding: 1vmax 4vmax;
+                padding-right: 1vmax;
+                width: 100%;
+                box-sizing: border-box;
+                border: 1px solid rgba(0, 0, 0, 0.267);
+                border-radius: 4px;
+                outline: none;
+            }
+
+            svg{
+                position: absolute;
+                transform: translateX(1vmax);
+                font-size: 1.6vmax;
+                color: rgba(0, 0, 0, 0.623);
+            }
+        }
+
+        .paymentButton{
+            border: none;
+            background-color: orangered;
+            color: white;
+            font-weight: 300;
+            font-size: 1vmax;
+            font-family: 'Times New Roman', Times, serif;
+            width: 100%;
+            padding: 1.2vmax;
+            cursor: pointer;
+            transition: all 0.5s;
+            outline: none;
+
+            &:hover{
+                background-color: seagreen;
+            }
+        }
+    }
+}
+
+@media screen and(max-width:770px) {
+    .paymentContainer{
+        height: 58.5vh;
+        .paymentForm{
+            width: 70%;
+
+            p{
+                font-size: 3vmax;
+                width: 60%;
+            }
+    
+            div{
+                margin: 2vw 0;
+
+                .paymentField{
+                    padding: 3vw 7vw;
+                }
+    
+                svg{
+                    font-size: 2.9vmax;
+                }
+            }
+    
+            .paymentButton{
+                padding: 2vw;
+                font-size: 3.4vw;
+            }
+        }
+    } 
+}

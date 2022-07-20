@@ -4,6 +4,10 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   SHIPPING_INFO,
+  CREATE_ORDER_FAIL,
+  CREATE_ORDER_REQUEST,
+  CLEAR_ERRORS,
+  CREATE_ORDER_SUCCESS,
 } from "../constants/placeOrder";
 
 // add to cart
@@ -43,4 +47,32 @@ export const saveShippingInfo = (data) => async (dispatch) => {
   });
 
   localStorage.setItem("shippingInfo", JSON.stringify(data));
+};
+
+// create new order here
+export const createNewOrder = (order) => async (dispatch) => {
+  try {
+    dispatch({ type: CREATE_ORDER_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post("api/check/order/new", order, config);
+
+    dispatch({
+      type: CREATE_ORDER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: CREATE_ORDER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const clearErrors = () => async (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
 };
