@@ -79,6 +79,12 @@ function UserProfile({ user }) {
       <SpeedDial
         className="avatarComponent"
         ariaLabel="userAvatar"
+        sx={{
+          backgroundColor: "none",
+          "& .MuiButtonBase": {
+            backgroundColor: "red",
+          },
+        }}
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
@@ -93,6 +99,7 @@ function UserProfile({ user }) {
       >
         {options.map((index) => (
           <SpeedDialAction
+            sx={{ backgroundColor: "none" }}
             key={index.name}
             icon={index.icon}
             tooltipTitle={index.name}

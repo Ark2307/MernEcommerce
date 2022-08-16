@@ -8,6 +8,9 @@ import {
   CREATE_ORDER_REQUEST,
   CLEAR_ERRORS,
   CREATE_ORDER_SUCCESS,
+  USER_ORDERS_FAIL,
+  USER_ORDERS_REQUEST,
+  USER_ORDERS_SUCCESS,
 } from "../constants/placeOrder";
 
 // add to cart
@@ -68,6 +71,24 @@ export const createNewOrder = (order) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CREATE_ORDER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// show user orders here
+export const userOrders = () => async (dispatch) => {
+  try {
+    dispatch({ type: USER_ORDERS_REQUEST });
+    const { data } = await axios.get("api/check/order/myOrder");
+
+    dispatch({
+      type: USER_ORDERS_SUCCESS,
+      payload: data.orders,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_ORDERS_FAIL,
       payload: error.response.data.message,
     });
   }

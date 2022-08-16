@@ -17,7 +17,11 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import EventIcon from "@mui/icons-material/Event";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 
-import { clearErrors, createNewOrder } from "../../actions/orderActions";
+import {
+  clearErrors,
+  createNewOrder,
+  removeFromCart,
+} from "../../actions/orderActions";
 
 import UseHelmet from "../layout/UseHelmet";
 import CheckoutSteps from "./CheckoutSteps";
@@ -100,6 +104,7 @@ function PaymentComponent() {
           };
 
           dispatch(createNewOrder());
+          dispatch(removeFromCart());
 
           navigate("/success");
         } else {

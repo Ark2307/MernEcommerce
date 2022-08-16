@@ -23,6 +23,8 @@ import Cart from "./components/Cart/Cart";
 import ShippingInfo from "./components/Orders/ShippingInfo";
 import Confirm from "./components/Orders/Confirm";
 import Payment from "./components/Orders/Payment";
+import OrderSuccess from "./components/Orders/OrderSuccess";
+import MyOrders from "./components/User/Orders/MyOrders";
 
 function App() {
   useEffect(() => {
@@ -35,6 +37,7 @@ function App() {
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/success" element={<OrderSuccess />} />
           <Route exact path="/product/:id" element={<ProductInfo />} />
           <Route
             exact
@@ -81,6 +84,11 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/products/:keyword" element={<AllProducts />} />
+          <Route
+            exact
+            path="/orders"
+            element={<AuthenticatedRoute Component={MyOrders} />}
+          />
         </Routes>
         <Footer />
       </section>
