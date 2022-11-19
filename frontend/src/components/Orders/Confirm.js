@@ -7,10 +7,12 @@ import "./Confirm.scss";
 import CheckoutSteps from "./CheckoutSteps";
 import UseHelmet from "../layout/UseHelmet";
 
+import { useAuth0 } from "@auth0/auth0-react";
+
 function Confirm() {
   const navigate = useNavigate();
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.user);
+  const { user } = useAuth0();
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,

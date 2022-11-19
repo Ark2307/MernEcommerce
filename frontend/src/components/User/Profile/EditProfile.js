@@ -16,13 +16,15 @@ import { UPDATE_PROFILE_RESET } from "../../../constants/userConstants";
 import "./EditProfile.scss";
 import Loader from "../../layout/Loading/Loader";
 import UseHelmet from "../../layout/UseHelmet";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const { user } = useSelector((state) => state.user);
+  // const { user } = useSelector((state) => state.user);
+  const { user } = useAuth0();
   const { loading, isUpdated, error } = useSelector((state) => state.profile);
 
   const [name, setName] = useState("");

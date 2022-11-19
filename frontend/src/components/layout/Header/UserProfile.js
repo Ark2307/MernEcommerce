@@ -11,14 +11,23 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 
-import { logout } from "../../../actions/userActions";
+import { useAuth0 } from "@auth0/auth0-react";
+
+// import { logout } from "../../../actions/userActions";
 
 import "./UserProfile.scss";
 
 function UserProfile({ user }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
+  const { logout } = useAuth0();
+
+  const logoutWithRedirect = () =>
+    logout({
+      returnTo: window.location.origin,
+    });
 
   const { cartItems } = useSelector((state) => state.cart);
 
@@ -60,7 +69,7 @@ function UserProfile({ user }) {
   }
 
   function logoutUser() {
-    dispatch(logout());
+    logoutWithRedirect();
     alert.success("You have been logged out successfully");
   }
 
@@ -72,7 +81,7 @@ function UserProfile({ user }) {
     });
   }
 
-  //   console.log(user);
+  console.log(user);
   return (
     <Fragment>
       <BackDrop open={open} />
@@ -92,7 +101,7 @@ function UserProfile({ user }) {
         icon={
           <img
             className="avatarIcon"
-            src={user.profilePic.url ? user.profilePic.url : "/Profile.png"}
+            src={user.picture ? user.picture : "/Profile.png"}
             alt=""
           />
         }

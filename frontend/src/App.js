@@ -13,7 +13,7 @@ import Profile from "./components/User/Profile/Profile";
 import EditProfile from "./components/User/Profile/EditProfile";
 
 import AuthenticatedRoute from "./components/Routes/AuthenticatedRoute";
-import store from "./reactStore";
+// import store from "./reactStore";
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
 import UpdatePassword from "./components/User/Passwords/UpdatePassword";
@@ -27,9 +27,9 @@ import OrderSuccess from "./components/Orders/OrderSuccess";
 import MyOrders from "./components/User/Orders/MyOrders";
 
 function App() {
-  useEffect(() => {
-    store.dispatch(loadUser());
-  }, []);
+  // useEffect(() => {
+  //   store.dispatch(loadUser());
+  // }, []);
 
   return (
     <Router>

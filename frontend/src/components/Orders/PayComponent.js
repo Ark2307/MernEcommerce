@@ -26,6 +26,7 @@ import {
 import UseHelmet from "../layout/UseHelmet";
 import CheckoutSteps from "./CheckoutSteps";
 import "./Payment.scss";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function PaymentComponent() {
   const payBtn = useRef(null);
@@ -36,7 +37,7 @@ function PaymentComponent() {
   const navigate = useNavigate();
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.user);
+  const { user } = useAuth0();
   const { error } = useSelector((state) => state.newOrder);
 
   const orderDetails = JSON.parse(sessionStorage.getItem("orderDetails"));

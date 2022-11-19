@@ -5,11 +5,13 @@ import { useSelector } from "react-redux";
 import "./Profile.scss";
 import Loader from "../../layout/Loading/Loader";
 import UseHelmet from "../../layout/UseHelmet";
+import { useAuth0 } from "@auth0/auth0-react";
 
-function Profile() {
+const Profile = () => {
   const navigate = useNavigate();
 
-  const { loading, isAuthenticated, user } = useSelector((state) => state.user);
+  // const { loading, isAuthenticated, user } = useSelector((state) => state.user);
+  const { loading, isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
     if (isAuthenticated === false) navigate("/login");
@@ -52,6 +54,6 @@ function Profile() {
       )}
     </Fragment>
   );
-}
+};
 
 export default Profile;
