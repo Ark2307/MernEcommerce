@@ -7,6 +7,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import { Auth0Provider } from "@auth0/auth0-react";
+// import dotenv from "dotenv";
 
 const options = {
   timeout: 4000,
@@ -31,13 +33,24 @@ const theme = createTheme({
   },
 });
 
+const DOMAIN = process.env.REACT_APP_DOMAIN;
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+
+console.log(DOMAIN, CLIENT_ID);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-    <AlertProvider template={AlertTemplate} {...options}>
-      <ThemeProvider theme={theme}>
+  <Auth0Provider
+    domain={DOMAIN}
+    clientId={CLIENT_ID}
+    redirectUri={window.location.origin}
+  >
+    <Provider store={store}>
+      <AlertProvider template={AlertTemplate} {...options}>
+        {/* <ThemeProvider theme={theme}> */}
         <App />
-      </ThemeProvider>
-    </AlertProvider>
-  </Provider>
+        {/* </ThemeProvider> */}
+      </AlertProvider>
+    </Provider>
+  </Auth0Provider>
 );

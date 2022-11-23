@@ -67,13 +67,23 @@ export const signup = (userInfo) => async (dispatch) => {
 };
 
 //Get logged in user from cookies
-export const loadUser = () => async (dispatch) => {
+export const loadUser = (isAuthenticated, email) => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
-    const { data } = await axios.get("/api/check/user/details");
+    const config = { headers: { "Content-Type": "application/json" } };
+    // console.log(email);
+    // console.log(isAuthenticated);
+
+    const { data } = await axios.post(
+      "/api/check/user/details",
+      { isAuthenticated, email },
+      config
+    );
+    // console.log(data);
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
+    // console.log("HI");
     dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
   }
 };

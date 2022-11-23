@@ -8,7 +8,9 @@ import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import Bars from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "./Header.scss";
 import UserProfile from "./UserProfile";
@@ -43,7 +45,7 @@ function Header() {
     navigate("/cart");
   }
 
-  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useAuth0();
 
   if (!isAuthenticated) {
     options.push({ icon: <LoginIcon />, name: "Login", func: isLogin });
