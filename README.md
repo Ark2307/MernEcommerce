@@ -14,6 +14,24 @@
 - `npm ci`
 - `npm start`
 
-#### cd to the backend folder and run the following commands to start the node server at http://localhost:8070 -
+#### cd to the server folder and run the following commands to start the node server at http://localhost:8070 -
 - `npm ci`
+- `mkdir config` to create new folder called config
+- `cd config` to go inside the config folder
+- `touch database.js` to create a file called the database.js inside config folder
+
+### Copy the following code in database.js
+-  const mongoose = require("mongoose");
+-  const connectDB = () => {
+-   mongoose.connect(process.env.DB_URI, {
+-     useUnifiedTopology: true,
+-     useNewUrlParser: true,
+-    })
+-    .then((e) => {
+-      console.log(`Mongo DB connected with server ${e.connection.host}`); 
+-    });
+-};
+- module.exports = connectDB;
+
+### Go to the server folder and then run the Script
 - `npm run dev`
