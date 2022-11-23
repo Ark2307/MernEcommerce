@@ -29,11 +29,11 @@ const userModel = new mongoose.Schema({
   profilePic: {
     url: {
       type: String,
-      required: true,
+      // required: true,
     },
     public_key: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
 

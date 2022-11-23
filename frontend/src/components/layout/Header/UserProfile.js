@@ -81,7 +81,7 @@ function UserProfile({ user }) {
     });
   }
 
-  console.log(user);
+  // console.log(user);
   return (
     <Fragment>
       <BackDrop open={open} />

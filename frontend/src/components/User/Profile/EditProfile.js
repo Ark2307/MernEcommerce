@@ -23,8 +23,8 @@ function EditProfile() {
   const navigate = useNavigate();
   const alert = useAlert();
 
-  // const { user } = useSelector((state) => state.user);
-  const { user } = useAuth0();
+  const { user } = useSelector((state) => state.user);
+  const { userAuth } = useAuth0();
   const { loading, isUpdated, error } = useSelector((state) => state.profile);
 
   const [name, setName] = useState("");
@@ -62,7 +62,7 @@ function EditProfile() {
     if (user) {
       setName(user.name);
       setEmail(user.email);
-      setAvatarPreview(user.profilePic.url);
+      setAvatarPreview(user.picture);
     }
 
     if (error) {
@@ -72,13 +72,16 @@ function EditProfile() {
 
     if (isUpdated) {
       alert.success("Profile updated Successfully");
+      userAuth.name = user.name;
+      userAuth.picture = user.profilePic.url;
+      userAuth.email = user.email;
       dispatch(loadUser());
 
       navigate("/profile");
 
       dispatch({ type: UPDATE_PROFILE_RESET });
     }
-  }, [dispatch, error, alert, isUpdated, navigate, user]);
+  }, [dispatch, error, alert, isUpdated, navigate, user, userAuth]);
 
   return (
     <Fragment>

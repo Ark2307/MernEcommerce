@@ -235,12 +235,38 @@
 
 // export default Login;
 import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
+import React, { useEffect } from "react";
+import { useAlert } from "react-alert";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { clearErrors } from "../../../actions/userActions";
+
+import "./Login.scss";
 
 const Login = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, error } = useAuth0();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const alert = useAlert();
 
-  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+  const redirect = location.search ? location.search.split("=")[1] : "/profile";
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+
+    if (isAuthenticated) {
+      navigate(redirect);
+    }
+  }, [dispatch, error, isAuthenticated, navigate, redirect, alert]);
+
+  return (
+    <button className="button" onClick={() => loginWithRedirect()}>
+      Log In
+    </button>
+  );
 };
 
 export default Login;

@@ -3,8 +3,7 @@ const catchAsyncErrors = require("../middlewares/tryCatchError");
 const User = require("../models/userSchema");
 const sendToken = require("../utils/token");
 
-const cloudinary = require("cloudinary");
-const { findById } = require("../models/userSchema");
+// const cloudinary = require("cloudinary");
 
 // register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -13,20 +12,18 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Passwords do not match", 400));
   }
 
-  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "avatars",
-    width: 150,
-    crop: "scale",
-  });
+  const userExist = await User.findOne({ email });
+  // if (userExist === null) {
+  //   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  //     folder: "avatars",
+  //     width: 150,
+  //     crop: "scale",
+  //   });
 
   const user = await User.create({
     name,
     email,
     password,
-    profilePic: {
-      url: myCloud.secure_url,
-      public_key: myCloud.public_id,
-    },
   });
 
   sendToken(user, 201, res);
@@ -51,7 +48,12 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Enter valid email or password", 401));
   }
 
-  sendToken(user, 200, res);
+  res.status(200).json({
+    message: "Successful Logged In",
+    user,
+  });
+
+  // sendToken(user, 200, res);
 });
 
 // logout user
@@ -69,7 +71,9 @@ exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
 
 // get user details
 exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  // console.log(req.user);
   const user = await User.findById(req.user.id);
+  // console.log(user);
 
   res.status(200).json({
     success: true,
@@ -106,20 +110,20 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
   if (req.body.profilePic !== "") {
     const user = await User.findById(req.user.id);
-    const imgId = user.profilePic.public_key;
+    // const imgId = user.profilePic.public_key;
 
-    await cloudinary.v2.uploader.destroy(imgId);
+    // await cloudinary.v2.uploader.destroy(imgId);
 
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    });
+    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //   folder: "avatars",
+    //   width: 150,
+    //   crop: "scale",
+    // });
 
-    newUserDetails.profilePic = {
-      url: myCloud.secure_url,
-      public_key: myCloud.public_id,
-    };
+    // newUserDetails.profilePic = {
+    //   url: myCloud.secure_url,
+    //   public_key: myCloud.public_id,
+    // };
   }
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserDetails, {

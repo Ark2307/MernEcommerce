@@ -13,9 +13,9 @@ import Profile from "./components/User/Profile/Profile";
 import EditProfile from "./components/User/Profile/EditProfile";
 
 import AuthenticatedRoute from "./components/Routes/AuthenticatedRoute";
-// import store from "./reactStore";
+import store from "./reactStore";
 import Header from "./components/layout/Header/Header";
-import Footer from "./components/layout/Footer/Footer";
+// import Footer from "./components/layout/Footer/Footer";
 import UpdatePassword from "./components/User/Passwords/UpdatePassword";
 import ForgetPassword from "./components/User/Passwords/ForgetPassword";
 import ResetPassword from "./components/User/Passwords/ResetPassword";
@@ -25,11 +25,19 @@ import Confirm from "./components/Orders/Confirm";
 import Payment from "./components/Orders/Payment";
 import OrderSuccess from "./components/Orders/OrderSuccess";
 import MyOrders from "./components/User/Orders/MyOrders";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
-  // useEffect(() => {
-  //   store.dispatch(loadUser());
-  // }, []);
+  const { isAuthenticated, user } = useAuth0();
+  // console.log(user);
+
+  useEffect(() => {
+    // console.log(isAuthenticated);
+    if (isAuthenticated) {
+      // console.log(user.email);
+      store.dispatch(loadUser(isAuthenticated, user.email));
+    }
+  }, [isAuthenticated, user]);
 
   return (
     <Router>
@@ -90,7 +98,7 @@ function App() {
             element={<AuthenticatedRoute Component={MyOrders} />}
           />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </section>
     </Router>
   );

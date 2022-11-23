@@ -11,13 +11,14 @@ const Profile = () => {
   const navigate = useNavigate();
 
   // const { loading, isAuthenticated, user } = useSelector((state) => state.user);
-  const { loading, isAuthenticated, user } = useAuth0();
+  const { loading, isAuthenticated } = useAuth0();
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (isAuthenticated === false) navigate("/login");
   }, [navigate, isAuthenticated]);
 
-  const imgUrl = user.profilePic.url;
+  const imgUrl = user.picture;
 
   return (
     <Fragment>
